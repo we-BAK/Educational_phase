@@ -1,0 +1,30 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        i=0
+        k=len(p)
+        j=k
+        n=len(s)
+        result=[]
+       
+        flag=True
+        if n<k:
+            return result
+        p_count=[0]*26
+        for c in p:
+            p_count[ord(c) - ord('a')] += 1
+        s_count=[0]*26
+        for i in range(n):
+            s_count[ord(s[i]) - ord('a')] += 1
+            if i >= k:
+                s_count[ord(s[i - k]) - ord('a')] -= 1
+            if s_count == p_count:
+                result.append(i - k + 1)
+
+        return result
+
+            
+
+
+
+
+        
