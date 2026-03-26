@@ -1,0 +1,13 @@
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        count = 0
+        Pre_Sum = 0
+        freq = {0: 1}  
+        for num in nums:
+            if num % 2 == 1:
+                Pre_Sum += 1
+            if Pre_Sum - k in freq:
+                count += freq[Pre_Sum - k]
+            freq[Pre_Sum] = freq.get(Pre_Sum, 0) + 1
+
+        return count
