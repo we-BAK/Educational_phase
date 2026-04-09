@@ -1,0 +1,14 @@
+from collections import defaultdict
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        res=defaultdict(lambda:-1)
+        stack=[]
+        nums2=nums+nums
+        for i in range(len(nums2)):
+            while stack and nums2[i]>nums2[stack[-1]]:
+                res[stack.pop()]=nums2[i]
+            stack.append(i)
+        answer=[res[j]for j in range(len(nums))]
+        return answer
+
+        
