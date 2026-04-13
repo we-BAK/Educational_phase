@@ -1,0 +1,27 @@
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        
+        min_que = deque()
+        max_que = deque()
+        ans = 0
+        start = 0
+        for end in range(len(nums)):
+            while max_que and nums[end] > nums[max_que[-1]]:
+                max_que.pop()
+            max_que.append(end)
+
+            while min_que and nums[end] < nums[min_que[-1]]:
+                min_que.pop()
+            min_que.append(end)
+
+            while nums[max_que[0]]-nums[min_que[0]] > limit:
+                if max_que[0] == start:
+                    max_que.popleft()
+                
+                if min_que[0] == start:
+                    min_que.popleft()
+                start += 1
+
+            ans = max(ans, end-start+1)
+    
+        return ans
