@@ -1,0 +1,17 @@
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        arr=[]
+        for i in range (1,n+1):
+            arr.append(i)
+        def win (n,k,index):
+            if n==1:
+                return arr[0]
+            index=(index + k-1)%n
+            arr.pop(index)
+            return win(n-1,k,index)
+        return win(n,k,0)
+
+            
+
+
+
