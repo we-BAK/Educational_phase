@@ -1,0 +1,37 @@
+class Solution:
+    def diffWaysToCompute(self, expression: str) -> List[int]:
+        results = []
+        
+        if not expression:
+            return results
+        if len(expression) == 1 :
+            results.append([int(expression)])
+            return [int(expression)]
+        if len(expression) == 2 and expression[0].isdigit():
+            results.append([int(expression)])
+            return [int(expression)]
+        
+        
+        for i in range(len(expression)):
+            if not expression[i].isdigit():
+                left = self.diffWaysToCompute(expression[:i])
+                right = self.diffWaysToCompute(expression[i+1:])
+
+                for l in left:
+                    for r in right:
+
+                        if expression[i] == "+":  
+                            result = l + r
+                            results.append(result)
+                    
+                        elif expression[i] == "*":
+                            result =  l *r 
+                            results.append(result)
+                            
+
+                        elif expression[i] == '-' :
+                            result =  l - r
+                            results.append(result)
+            
+        
+        return results
