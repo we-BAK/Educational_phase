@@ -1,0 +1,23 @@
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x==0:
+            return 0
+        if x==1:
+            return 1
+        # arr=list(range(x))
+        left=0
+        right=x//2
+        pro=0
+        while left<=right:
+            mid=(left+right)//2
+            if mid*mid==x:
+                return mid
+            elif mid*mid<x:
+                left=mid+1
+                pro=mid
+            else:
+                right=mid-1
+        return pro
+
+                
+        
